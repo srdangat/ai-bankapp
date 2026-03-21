@@ -20,3 +20,9 @@ A Spring Boot banking application used as a base for learning end-to-end DevOps 
 - AI chatbot that knows your balance and recent transactions
 - Prometheus metrics at `/actuator/prometheus`
 - Health check at `/actuator/health`
+
+
+## 👨‍💻 Credits
+
+Inspired by the original project by **trainwithshubham**:  
+👉 [https://github.com/trainwithshubham/<repo>](https://github.com/TrainWithShubham/AI-BankApp-DevOps)
