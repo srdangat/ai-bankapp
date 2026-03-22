@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: bankapp-cm
+  namespace: bankapp
+data:
+  MYSQL_DATABASE: bankappdb
+  MYSQL_HOST: mysql-svc
+  MYSQL_PORT: "3306"
+  MYSQL_USER: root
+  ollama_URL: http://ollama:11434
