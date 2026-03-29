@@ -7,5 +7,5 @@ data:
   MYSQL_DATABASE: bankappdb
   MYSQL_HOST: mysql-svc
   MYSQL_PORT: "3306"
-  MYSQL_USER: bankuser
-  ollama_URL: http://ollama:11434
+  # MYSQL_USER: root
+  ollama_URL: http://ollama-svc:11434
