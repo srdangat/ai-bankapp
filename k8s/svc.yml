@@ -17,8 +17,32 @@ metadata:
   namespace: bankapp
 spec:
   type: NodePort
+  sessionAffinity: ClientIP
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 3600
   selector:
     app: bankapp
   ports:
     - port: 8080
       targetPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ollama-svc
+  namespace: bankapp
+spec:
+  selector:
+    app: ollama
+  ports:
+    - port: 11434
+      targetPort: 11434
+
+# sessionAffinity: ClientIP
+# Makes the Service stick a client to the same Pod
+# Same client IP → always routed to same backend Pod
+# Useful for sessions (login, carts, etc.)
+
+# sessionAffinityConfig: how long stickiness is maintained
