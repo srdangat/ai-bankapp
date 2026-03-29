@@ -10,6 +10,8 @@ spec:
   selector:
     matchLabels:
       app: mysql
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
@@ -18,13 +20,28 @@ spec:
       containers:
         - name: mysql
           image: mysql:8.0
+          resources:
+            # min resources needed to run the container
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            # max resources needed to run the container
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
           ports:
             - containerPort: 3306
-          readinessProbe:
+          readinessProbe: #determines when pod can receive traffic
             exec:
               command: ["mysqladmin", "ping", "-h", "localhost"]
             initialDelaySeconds: 15
             periodSeconds: 10
+          livenessProbe: # restarts container if MySQL is “dead”
+            exec:
+              command: ["mysqladmin", "ping", "-h", "localhost"]
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            failureThreshold: 5
           envFrom:
             - configMapRef:
                 name: bankapp-cm
